@@ -1,8 +1,8 @@
 # Distributed-Kit
-分布式工具集-基于redis和zookeeper的分布式锁,分布式限速器等实现.
+基于redis和zookeeper分布式工具集-包括:分布式锁实现,分布式速率限制器,分布式序列等.
 
 
-#基于Redis实现的分布式锁(可重入锁,仅限获得持有锁的jvm内重入)
+#基于Redis实现的分布式锁(可重入)
 ~~~ java
 public static void main(String[] args){
     JedisPool jedisPool=new JedisPool("127.0.0.1",6379);//实际应用时可通过spring注入
@@ -37,7 +37,7 @@ public static void main(String[] args) throws Exception {
     }
 }
 ~~~
-#基于Zookeeper实现的分布式锁(可重入锁,仅限获得持有锁的jvm内重入)
+#基于Zookeeper实现的分布式锁(可重入)
 ~~~ java
 public static void main(String[] args){
     RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
@@ -69,7 +69,7 @@ public class AccessSpeedLimitTest {
         AccessSpeedLimit accessSpeedLimit=new AccessSpeedLimit(jp);
         SimpleDateFormat sdf=new SimpleDateFormat(" mm:ss");
         while(true){
-            //10.0.0.1这个ip每1秒钟最多访问5次本方法.
+            //10.0.0.1这个ip每1秒钟最多访问5次if块内代码
             if(accessSpeedLimit.tryAccess("10.0.0.1", 1,5)){
                 System.out.println("yes"+sdf.format(new Date()));
             }else{
@@ -91,7 +91,7 @@ public class AccessSpeedLimitTest {
         AccessSpeedLimit accessSpeedLimit=new AccessSpeedLimit(jp);
         SimpleDateFormat sdf=new SimpleDateFormat(" mm:ss");
         while(true){
-            //10.0.0.1这个ip每1秒钟最多访问5次本方法.1秒超过10次后,锁定2秒.
+            //10.0.0.1这个ip每1秒钟最多访问5次if块内代码.1秒超过10次后,锁定2秒,2秒内无法访问.
             if(accessSpeedLimit.tryAccess("10.0.0.1",limitRule)){
                 System.out.println("yes"+sdf.format(new Date()));
             }else{
