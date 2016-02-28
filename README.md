@@ -2,7 +2,7 @@
 基于redis和zookeeper分布式工具集-包括:分布式锁实现,分布式速率限制器,分布式序列等.
 
 ## 使用
-### maven: must install localrepository
+### maven: 需先编译安装到本地仓库或者本地私服。
 <pre><code>
     &lt;dependency&gt;
       &lt;groupId&gt;dance&lt;/groupId&gt;
@@ -71,10 +71,10 @@ public static void main(String[] args){
 ~~~
 ##基于Redis实现的分布式速率限制器
 
->限制的资源,可以是ip,用户id,订单id,手机号,等等.
-*例如限制一个手机号每分钟只能发1条短信.
-*例如限制一个手机号每10秒钟只能发起1次叫车请求.
-*例如限制一个ip地址每秒钟只能访问10次特定的资源.
+限制的资源,可以是ip,用户id,订单id,手机号,等等.
+* 例如限制一个手机号每分钟只能发1条短信.
+* 例如限制一个手机号每10秒钟只能发起1次叫车请求.
+* 例如限制一个ip地址每秒钟只能访问10次特定的资源.
 
 ~~~ java
 public class AccessSpeedLimitTest {
