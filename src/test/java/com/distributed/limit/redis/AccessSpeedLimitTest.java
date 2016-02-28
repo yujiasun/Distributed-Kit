@@ -18,7 +18,7 @@ public class AccessSpeedLimitTest {
         AccessSpeedLimit accessSpeedLimit=new AccessSpeedLimit(jp);
         SimpleDateFormat sdf=new SimpleDateFormat(" mm:ss");
         while(true){
-            //10.0.0.1这个ip每1秒钟最多访问5次本方法.
+            //10.0.0.1这个ip每1秒钟最多访问5次if块内代码.
             if(accessSpeedLimit.tryAccess("10.0.0.1", 1,5)){
                 System.out.println("yes"+sdf.format(new Date()));
             }else{
@@ -40,7 +40,7 @@ public class AccessSpeedLimitTest {
         AccessSpeedLimit accessSpeedLimit=new AccessSpeedLimit(jp);
         SimpleDateFormat sdf=new SimpleDateFormat(" mm:ss");
         while(true){
-            //10.0.0.1这个ip每1秒钟最多访问5次本方法.1秒超过10次后,锁定2秒.
+            //10.0.0.1这个ip每1秒钟最多访问5次if块内代码.1秒超过10次后,锁定2秒,2秒内无法访问.
             if(accessSpeedLimit.tryAccess("10.0.0.1",limitRule)){
                 System.out.println("yes"+sdf.format(new Date()));
             }else{
