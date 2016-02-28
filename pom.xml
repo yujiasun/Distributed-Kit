@@ -7,7 +7,9 @@
     <groupId>dance</groupId>
     <artifactId>Distributed-Kit</artifactId>
     <version>0.0.1</version>
-
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -58,4 +60,15 @@
             </plugin>
         </plugins>
     </build>
+    <developers>
+        <developer>
+            <name>Sun yujia</name>
+            <id>yujiasun</id>
+            <email>yujiasun@aliyun.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
 </project>

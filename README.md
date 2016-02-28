@@ -15,8 +15,8 @@
 ~~~ java
 public static void main(String[] args){
     JedisPool jedisPool=new JedisPool("127.0.0.1",6379);//实际应用时可通过spring注入
-    final RedisDistributedLockTemplate template=new RedisDistributedLockTemplate(jedisPool);//本类多线程安全,可通过spring注入
-    template.execute("订单流水号", 5000, new Callback() {
+    final RedisDistributedLockTemplate template=new RedisDistributedLockTemplate(jedisPool);//本类线程安全,可通过spring注入
+    template.execute("订单流水号", 5000, new Callback() {//获取锁超时时间为5秒
         @Override
         public Object onGetLock() throws InterruptedException {
             //TODO 获得锁后要做的事
@@ -36,7 +36,7 @@ public static void main(String[] args) throws Exception {
     JedisPool jedisPool=new JedisPool("127.0.0.1",6379);//实际应用时可通过spring注入
     RedisReentrantLock lock=new RedisReentrantLock(jedisPool,"订单流水号");
     try {
-        if (lock.tryLock(5000L, TimeUnit.MILLISECONDS)) {
+        if (lock.tryLock(5000L, TimeUnit.MILLISECONDS)) {//获取锁超时时间为5秒
             //TODO 获得锁后要做的事
         }else{
             //TODO 获得锁超时后要做的事
@@ -46,6 +46,8 @@ public static void main(String[] args) throws Exception {
     }
 }
 ~~~
+[测试本实现的可靠性见](https://github.com/yujiasun/Distributed-Kit/blob/master/src/test/java/com/distributed/lock/redis/RedisReentrantLockTemplateTest.java)
+
 ##基于Zookeeper实现的分布式锁(可重入)
 ~~~ java
 public static void main(String[] args){
@@ -54,7 +56,7 @@ public static void main(String[] args){
     client.start();
 
     final ZkDistributedLockTemplate template=new ZkDistributedLockTemplate(client);//本类多线程安全,可通过spring注入
-    template.execute("订单流水号", 5000, new Callback() {
+    template.execute("订单流水号", 5000, new Callback() {//获取锁超时时间为5秒
         @Override
         public Object onGetLock() throws InterruptedException {
             //TODO 获得锁后要做的事
@@ -69,6 +71,8 @@ public static void main(String[] args){
     });
 }
 ~~~
+[测试本实现的可靠性见](https://github.com/yujiasun/Distributed-Kit/blob/master/src/test/java/com/distributed/lock/zk/ZkReentrantLockTemplateTest.java)
+
 ##基于Redis实现的分布式速率限制器
 
 限制的资源,可以是ip,用户id,订单id,手机号,等等.
