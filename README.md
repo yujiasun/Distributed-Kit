@@ -3,7 +3,7 @@
 
 
 #基于Redis实现的分布式锁(可重入锁,仅限获得持有锁的jvm内重入)
-
+~~~ java
 public static void main(String[] args){
     JedisPool jedisPool=new JedisPool("127.0.0.1",6379);//实际应用时可通过spring注入
     final RedisDistributedLockTemplate template=new RedisDistributedLockTemplate(jedisPool);//本类多线程安全,可通过spring注入
@@ -21,7 +21,8 @@ public static void main(String[] args){
         }
     });
 }
-
+~~~ 
+~~~ java
 public static void main(String[] args) throws Exception {
     JedisPool jedisPool=new JedisPool("127.0.0.1",6379);//实际应用时可通过spring注入
     RedisReentrantLock lock=new RedisReentrantLock(jedisPool,"订单流水号");
@@ -35,9 +36,9 @@ public static void main(String[] args) throws Exception {
         lock.unlock();
     }
 }
-
+~~~
 #基于Zookeeper实现的分布式锁(可重入锁,仅限获得持有锁的jvm内重入)
-
+~~~ java
 public static void main(String[] args){
     RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
     CuratorFramework client = CuratorFrameworkFactory.newClient("127.0.0.1:2181", retryPolicy);
@@ -58,8 +59,9 @@ public static void main(String[] args){
         }
     });
 }
-
+~~~
 #基于Redis实现的分布式速率限制器
+~~~ java
 public class AccessSpeedLimitTest {
     @Test
     public void test1() throws InterruptedException {
@@ -99,4 +101,4 @@ public class AccessSpeedLimitTest {
         }
     }
 }
-
+~~~
