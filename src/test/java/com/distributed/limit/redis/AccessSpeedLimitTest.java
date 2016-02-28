@@ -15,8 +15,6 @@ public class AccessSpeedLimitTest {
     @Test
     public void test1() throws InterruptedException {
         JedisPool jp=new JedisPool("127.0.0.1",6379);
-        final RedisDistributedLockTemplate template=new RedisDistributedLockTemplate(jp);
-
         AccessSpeedLimit accessSpeedLimit=new AccessSpeedLimit(jp);
         SimpleDateFormat sdf=new SimpleDateFormat(" mm:ss");
         while(true){

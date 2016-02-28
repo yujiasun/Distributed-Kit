@@ -56,4 +56,22 @@ public class RedisReentrantLockTemplateTest {
         startCountDownLatch.countDown();
         endDownLatch.await();
     }
+
+    public static void main(String[] args){
+        JedisPool jedisPool=new JedisPool("127.0.0.1",6379);//实际应用时可通过spring注入
+        final RedisDistributedLockTemplate template=new RedisDistributedLockTemplate(jedisPool);//本类多线程安全,可通过spring注入
+        template.execute("订单流水号", 5000, new Callback() {
+            @Override
+            public Object onGetLock() throws InterruptedException {
+                //TODO 获得锁后要做的事
+                return null;
+            }
+
+            @Override
+            public Object onTimeout() throws InterruptedException {
+                //TODO 获得锁超时后要做的事
+                return null;
+            }
+        });
+    }
 }
