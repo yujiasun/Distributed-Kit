@@ -46,7 +46,7 @@ public static void main(String[] args) throws Exception {
     }
 }
 ~~~
-[测试本实现的可靠性见](https://github.com/yujiasun/Distributed-Kit/blob/master/src/test/java/com/distributed/lock/redis/RedisReentrantLockTemplateTest.java)
+[测试本实现的可靠性见测试用例](https://github.com/yujiasun/Distributed-Kit/blob/master/src/test/java/com/distributed/lock/redis/RedisReentrantLockTemplateTest.java)
 
 ##基于Zookeeper实现的分布式锁(可重入)
 ~~~ java
@@ -71,7 +71,7 @@ public static void main(String[] args){
     });
 }
 ~~~
-[测试本实现的可靠性见](https://github.com/yujiasun/Distributed-Kit/blob/master/src/test/java/com/distributed/lock/zk/ZkReentrantLockTemplateTest.java)
+[测试本实现的可靠性见测试用例](https://github.com/yujiasun/Distributed-Kit/blob/master/src/test/java/com/distributed/lock/zk/ZkReentrantLockTemplateTest.java)
 
 ##基于Redis实现的分布式速率限制器
 
