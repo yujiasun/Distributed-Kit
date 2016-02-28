@@ -65,8 +65,15 @@ public class ZkReentrantLock implements DistributedReentrantLock {
     }
 
     @Override
-    public boolean tryLock(Long timeout, TimeUnit unit) throws Exception {
-        return interProcessMutex.acquire(timeout, unit);
+    public boolean tryLock(long timeout, TimeUnit unit) throws InterruptedException {
+        try {
+            return interProcessMutex.acquire(timeout, unit);
+        } catch (InterruptedException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(),e);
+        }
     }
 
     @Override

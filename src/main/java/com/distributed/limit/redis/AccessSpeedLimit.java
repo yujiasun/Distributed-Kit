@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ·Ö²¼Ê½ËÙÂÊÏŞÖÆ ÀıÈç:ÏŞÖÆnÃëÖÓÇëÇóx´Î
+ * åˆ†å¸ƒå¼é€Ÿç‡é™åˆ¶ ä¾‹å¦‚:é™åˆ¶nç§’é’Ÿè¯·æ±‚xæ¬¡
  * Created by sunyujia@aliyun.com on 2015/9/30.
  */
 public class AccessSpeedLimit {
@@ -38,7 +38,7 @@ public class AccessSpeedLimit {
     }
 
     /**
-     * Õë¶Ô×ÊÔ´key,Ã¿secondsÃë×î¶à·ÃÎÊmaxCount´Î,³¬¹ımaxCount´Î·µ»Øfalse
+     * é’ˆå¯¹èµ„æºkey,æ¯secondsç§’æœ€å¤šè®¿é—®maxCountæ¬¡,è¶…è¿‡maxCountæ¬¡è¿”å›false
      *
      * @param key
      * @param seconds
@@ -53,8 +53,8 @@ public class AccessSpeedLimit {
     }
 
     /**
-     * Õë¶Ô×ÊÔ´key,Ã¿limitRule.secondsÃë×î¶à·ÃÎÊlimitRule.limitCount,³¬¹ılimitCount´Î·µ»Øfalse
-     * ³¬¹ılockCount Ëø¶¨lockTime
+     * é’ˆå¯¹èµ„æºkey,æ¯limitRule.secondsç§’æœ€å¤šè®¿é—®limitRule.limitCount,è¶…è¿‡limitCountæ¬¡è¿”å›false
+     * è¶…è¿‡lockCount é”å®šlockTime
      * @param key
      * @param limitRule
      * @return
