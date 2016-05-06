@@ -2,7 +2,7 @@
 基于redis和zookeeper分布式工具集-包括:分布式锁实现,分布式速率限制器,分布式序列等.
 
 ## 使用
-### maven: 需先编译安装到本地仓库或者本地私服。
+### maven: 需先编译安装到本地仓库或者本地私服 。
 <pre><code>
     &lt;dependency&gt;
       &lt;groupId&gt;dance&lt;/groupId&gt;
@@ -48,7 +48,7 @@ public static void main(String[] args) throws Exception {
 ~~~
 [测试本实现的可靠性见测试用例](https://github.com/yujiasun/Distributed-Kit/blob/master/src/test/java/com/distributed/lock/redis/RedisReentrantLockTemplateTest.java)
 
-##基于Zookeeper实现的分布式锁(可重入)
+##基于Zookeeper实现的分布式锁( 可重入 )
 ~~~ java
 public static void main(String[] args){
     RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
