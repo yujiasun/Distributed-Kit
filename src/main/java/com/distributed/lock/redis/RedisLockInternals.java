@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -39,25 +40,15 @@ class RedisLockInternals {
         final long startMillis = System.currentTimeMillis();
         final Long millisToWait = (unit != null) ? unit.toMillis(time) : null;
         String lockValue=null;
-        ReentrantLock lock=new ReentrantLock();
-        try {
-            lock.lock();
-            Condition reTryCondition = lock.newCondition();
-            while (lockValue==null){
-                lockValue=createRedisKey(lockId);
-                if(lockValue!=null){
-                    break;
-                }
-                if(System.currentTimeMillis()-startMillis-retryAwait>millisToWait){
-                    break;
-                }
-                reTryCondition.await(retryAwait, TimeUnit.MILLISECONDS);
+        while (lockValue==null){
+            lockValue=createRedisKey(lockId);
+            if(lockValue!=null){
+                break;
             }
-        } catch (InterruptedException e) {
-            log.error(e.getMessage(),e);
-            Thread.interrupted();
-        }finally{
-            lock.unlock();
+            if(System.currentTimeMillis()-startMillis-retryAwait>millisToWait){
+                break;
+            }
+            LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(retryAwait));
         }
         return lockValue;
     }
@@ -129,5 +120,11 @@ class RedisLockInternals {
             cs[i] = digits[ThreadLocalRandom.current().nextInt(digits.length)];
         }
         return new String(cs);
+    }
+
+    public static void main(String[] args){
+        System.out.println(System.currentTimeMillis());
+        LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(300));
+        System.out.println(System.currentTimeMillis());
     }
 }
