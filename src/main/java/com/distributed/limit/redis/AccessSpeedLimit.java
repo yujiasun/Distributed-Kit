@@ -1,6 +1,5 @@
 package com.distributed.limit.redis;
 
-import com.distributed.utils.JedisUtils;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -75,13 +74,9 @@ public class AccessSpeedLimit {
             args.add(limitRule.getLockTime()+"");
             count=Long.parseLong(jedis.eval(buildLuaScript(limitRule),keys,args)+"");
             return count<=limitRule.getLimitCount();
-        } catch (JedisException e) {
-            log.error(e.getMessage(),e);
-            broken = JedisUtils.handleJedisException(jedisPool, e);
         } finally {
-            JedisUtils.closeResource(jedisPool, jedis, broken);
+            if(jedis!=null)jedis.close();
         }
-        return false;
     }
 
 
