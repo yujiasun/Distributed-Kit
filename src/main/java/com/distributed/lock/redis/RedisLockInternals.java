@@ -1,6 +1,5 @@
 package com.distributed.lock.redis;
 
-import com.distributed.utils.JedisUtils;
 import org.jboss.netty.util.internal.NonReentrantLock;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
@@ -29,7 +28,7 @@ class RedisLockInternals {
      */
     private int retryAwait=300;
 
-    private int lockTimeout=60*1000;
+    private int lockTimeout=2000;
 
 
     RedisLockInternals(JedisPool jedisPool) {
@@ -72,11 +71,8 @@ class RedisLockInternals {
             if( new Long(1).equals(ret)){
                 return value;
             }
-        } catch (JedisException e) {
-            log.error(e.getMessage(),e);
-            broken = JedisUtils.handleJedisException(jedisPool, e);
-        } finally {
-            JedisUtils.closeResource(jedisPool, jedis, broken);
+        }finally {
+            if(jedis!=null) jedis.close();
         }
         return null;
     }
@@ -98,12 +94,8 @@ class RedisLockInternals {
             List<String> args = new ArrayList<String>();
             args.add(value);
             Object r=jedis.eval(luaScript, keys, args);
-        } catch (JedisException e) {
-            log.error(e.getMessage(),e);
-            broken = JedisUtils.handleJedisException(jedisPool, e);
-            throw e;
         } finally {
-            JedisUtils.closeResource(jedisPool,jedis, broken);
+            if(jedis!=null) jedis.close();
         }
     }
 

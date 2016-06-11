@@ -1,7 +1,6 @@
 package com.distributed.lock.redis;
 
 import com.distributed.lock.DistributedReentrantLock;
-import com.distributed.utils.JedisUtils;
 import com.google.common.collect.Maps;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
