@@ -1,16 +1,16 @@
 package com.distributed.lock;
 
 /**
- * ·Ö²¼Ê½ËøÄ£°åÀà
+ * åˆ†å¸ƒå¼é”æ¨¡æ¿ç±»
  * Created by sunyujia@aliyun.com on 2016/2/23.
  */
 public interface DistributedLockTemplate {
 
     /**
      *
-     * @param lockId Ëøid(¶ÔÓ¦ÒµÎñÎ¨Ò»ID)
-     * @param timeout µ¥Î»ºÁÃë
-     * @param callback »Øµ÷º¯Êı
+     * @param lockId é”id(å¯¹åº”ä¸šåŠ¡å”¯ä¸€ID)
+     * @param timeout å•ä½æ¯«ç§’
+     * @param callback å›è°ƒå‡½æ•°
      * @return
      */
     public Object execute(String lockId,int timeout,Callback callback);
