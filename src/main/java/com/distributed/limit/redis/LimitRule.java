@@ -3,18 +3,18 @@ package com.distributed.limit.redis;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 限制规则
+ * 闄愬埗瑙勫垯
  * Created by sunyujia@aliyun.com on 2015/9/30.
  */
 public class LimitRule {
 
     /**
-     * 单位时间
+     * 鍗曚綅鏃堕棿
      */
     private int seconds;
 
     /**
-     * 单位时间内限制的访问次数
+     * 鍗曚綅鏃堕棿鍐呴檺鍒剁殑璁块棶娆℃暟
      */
     private int limitCount;
 

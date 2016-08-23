@@ -21,7 +21,7 @@ public class ZkReentrantLockCleanerTask extends TimerTask {
     private Timer timer;
 
     /**
-     * ¼ì²éÖÜÆÚ
+     * æ£€æŸ¥å‘¨æœŸ
      */
     private long period=5000;
     /**
@@ -70,7 +70,7 @@ public class ZkReentrantLockCleanerTask extends TimerTask {
     private void cleanNode(String path){
         try {
             if(isEmpty(this.client.getChildren().forPath(path))){
-                this.client.delete().forPath(path);//ÀûÓÃ´æÔÚ×Ó½ÚµãÎŞ·¨É¾³ıºÍzkµÄÔ­×ÓĞÔÕâÁ½¸öÌØĞÔ.
+                this.client.delete().forPath(path);//åˆ©ç”¨å­˜åœ¨å­èŠ‚ç‚¹æ— æ³•åˆ é™¤å’Œzkçš„åŸå­æ€§è¿™ä¸¤ä¸ªç‰¹æ€§.
             }
         } catch (Exception e) {
             e.printStackTrace();

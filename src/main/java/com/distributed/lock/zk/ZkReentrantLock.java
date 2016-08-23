@@ -14,41 +14,41 @@ import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * »ùÓÚZookeeperµÄ¿ÉÖØÈë»¥³âËø(¹ØÓÚÖØÈë:½öÏŞÓÚ³ÖÓĞzkËøµÄjvmÄÚÖØÈë)
+ * åŸºäºZookeeperçš„å¯é‡å…¥äº’æ–¥é”(å…³äºé‡å…¥:ä»…é™äºæŒæœ‰zké”çš„jvmå†…é‡å…¥)
  * Created by sunyujia@aliyun.com on 2016/2/24.
  */
 public class ZkReentrantLock implements DistributedReentrantLock {
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(ZkReentrantLock.class);
 
     /**
-     * Ïß³Ì³Ø
+     * çº¿ç¨‹æ± 
      */
     private static final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(10);
 
     /**
-     * ËùÓĞPERSISTENTËø½ÚµãµÄ¸ùÎ»ÖÃ
+     * æ‰€æœ‰PERSISTENTé”èŠ‚ç‚¹çš„æ ¹ä½ç½®
      */
     public static final String ROOT_PATH = "/ROOT_LOCK/";
 
     /**
-     * Ã¿´ÎÑÓ³ÙÇåÀíPERSISTENT½ÚµãµÄÊ±¼ä  Unit:MILLISECONDS
+     * æ¯æ¬¡å»¶è¿Ÿæ¸…ç†PERSISTENTèŠ‚ç‚¹çš„æ—¶é—´  Unit:MILLISECONDS
      */
     private long delayTimeForClean = 1000;
 
     /**
-     * zk ¹²ÏíËøÊµÏÖ
+     * zk å…±äº«é”å®ç°
      */
     private InterProcessMutex interProcessMutex = null;
 
 
     /**
-     * ËøµÄID,¶ÔÓ¦zkÒ»¸öPERSISTENT½Úµã,ÏÂ¹ÒEPHEMERAL½Úµã.
+     * é”çš„ID,å¯¹åº”zkä¸€ä¸ªPERSISTENTèŠ‚ç‚¹,ä¸‹æŒ‚EPHEMERALèŠ‚ç‚¹.
      */
     private String path;
 
 
     /**
-     * zkµÄ¿Í»§¶Ë
+     * zkçš„å®¢æˆ·ç«¯
      */
     private CuratorFramework client;
 
@@ -107,7 +107,7 @@ public class ZkReentrantLock implements DistributedReentrantLock {
             } catch (KeeperException.NotEmptyException e2) {
                 //nothing
             } catch (Exception e) {
-                log.error(e.getMessage(), e);//×¼±¸É¾³ıÊ±,ÕıºÃÓĞÏß³Ì´´½¨Ëø
+                log.error(e.getMessage(), e);//å‡†å¤‡åˆ é™¤æ—¶,æ­£å¥½æœ‰çº¿ç¨‹åˆ›å»ºé”
             }
         }
     }

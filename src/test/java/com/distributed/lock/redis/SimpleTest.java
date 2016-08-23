@@ -15,13 +15,13 @@ import java.util.concurrent.locks.ReentrantLock;
 public class SimpleTest {
 
     public static void main(String[] args) throws Exception {
-        JedisPool jedisPool=new JedisPool("127.0.0.1",6379);//Êµ¼ÊÓ¦ÓÃÊ±¿ÉÍ¨¹ıspring×¢Èë
-        RedisReentrantLock lock=new RedisReentrantLock(jedisPool,"¶©µ¥Á÷Ë®ºÅ");
+        JedisPool jedisPool=new JedisPool("127.0.0.1",6379);//å®é™…åº”ç”¨æ—¶å¯é€šè¿‡springæ³¨å…¥
+        RedisReentrantLock lock=new RedisReentrantLock(jedisPool,"è®¢å•æµæ°´å·");
         try {
             if (lock.tryLock(5000L, TimeUnit.MILLISECONDS)) {
-                //TODO »ñµÃËøºóÒª×öµÄÊÂ
+                //TODO è·å¾—é”åè¦åšçš„äº‹
             }else{
-                //TODO »ñµÃËø³¬Ê±ºóÒª×öµÄÊÂ
+                //TODO è·å¾—é”è¶…æ—¶åè¦åšçš„äº‹
             }
         }finally {
             lock.unlock();
@@ -29,18 +29,18 @@ public class SimpleTest {
     }
 
     public static void test1(){
-        JedisPool jedisPool=new JedisPool("127.0.0.1",6379);//Êµ¼ÊÓ¦ÓÃÊ±¿ÉÍ¨¹ıspring×¢Èë
-        final RedisDistributedLockTemplate template=new RedisDistributedLockTemplate(jedisPool);//±¾Àà¶àÏß³Ì°²È«,¿ÉÍ¨¹ıspring×¢Èë
-        template.execute("¶©µ¥Á÷Ë®ºÅ", 5000, new Callback() {
+        JedisPool jedisPool=new JedisPool("127.0.0.1",6379);//å®é™…åº”ç”¨æ—¶å¯é€šè¿‡springæ³¨å…¥
+        final RedisDistributedLockTemplate template=new RedisDistributedLockTemplate(jedisPool);//æœ¬ç±»å¤šçº¿ç¨‹å®‰å…¨,å¯é€šè¿‡springæ³¨å…¥
+        template.execute("è®¢å•æµæ°´å·", 5000, new Callback() {
             @Override
             public Object onGetLock() throws InterruptedException {
-                //TODO »ñµÃËøºóÒª×öµÄÊÂ
+                //TODO è·å¾—é”åè¦åšçš„äº‹
                 return null;
             }
 
             @Override
             public Object onTimeout() throws InterruptedException {
-                //TODO »ñµÃËø³¬Ê±ºóÒª×öµÄÊÂ
+                //TODO è·å¾—é”è¶…æ—¶åè¦åšçš„äº‹
                 return null;
             }
         });

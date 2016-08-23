@@ -18,7 +18,7 @@ public class AccessSpeedLimitTest {
         AccessSpeedLimit accessSpeedLimit=new AccessSpeedLimit(jp);
         SimpleDateFormat sdf=new SimpleDateFormat(" mm:ss");
         while(true){
-            //10.0.0.1Õâ¸öipÃ¿1ÃëÖÓ×î¶à·ÃÎÊ5´Îif¿éÄÚ´úÂë.
+            //10.0.0.1è¿™ä¸ªipæ¯1ç§’é’Ÿæœ€å¤šè®¿é—®5æ¬¡ifå—å†…ä»£ç .
             if(accessSpeedLimit.tryAccess("10.0.0.1", 1,5)){
                 System.out.println("yes"+sdf.format(new Date()));
             }else{
@@ -40,7 +40,7 @@ public class AccessSpeedLimitTest {
         AccessSpeedLimit accessSpeedLimit=new AccessSpeedLimit(jp);
         SimpleDateFormat sdf=new SimpleDateFormat(" mm:ss");
         while(true){
-            //10.0.0.1Õâ¸öipÃ¿1ÃëÖÓ×î¶à·ÃÎÊ5´Îif¿éÄÚ´úÂë.1Ãë³¬¹ı10´Îºó,Ëø¶¨2Ãë,2ÃëÄÚÎŞ·¨·ÃÎÊ.
+            //10.0.0.1è¿™ä¸ªipæ¯1ç§’é’Ÿæœ€å¤šè®¿é—®5æ¬¡ifå—å†…ä»£ç .1ç§’è¶…è¿‡10æ¬¡å,é”å®š2ç§’,2ç§’å†…æ— æ³•è®¿é—®.
             if(accessSpeedLimit.tryAccess("10.0.0.1",limitRule)){
                 System.out.println("yes"+sdf.format(new Date()));
             }else{
